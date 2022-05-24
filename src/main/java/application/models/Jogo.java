@@ -38,8 +38,8 @@ public class Jogo {
     public void setGenero(Genero genero) {
         this.genero = genero;
     }
-    public void setJogos(Set<Jogo> jogos) {
-        this.jogos = jogos;
+    public Genero getGenero() {
+        return this.genero;
     }
 
     @ManyToMany
@@ -49,14 +49,13 @@ public class Jogo {
         inverseJoinColumns = @JoinColumn(name = "plataformas_id")
     )
 
-    private Set<Jogo> jogos = new HashSet<>();
-    
-    public Set<Jogo> getJogos() {
-        return jogos;
-    }
-    public Genero getGenero() {
-        return genero;
-    }
-    
+    private Set<Plataforma> plataformas = new HashSet<>();
 
+    public Set<Plataforma> getPlataformas() {
+        return plataformas;
+    }
+    public void setPlataformas(Set<Plataforma> plataformas) {
+        this.plataformas = plataformas;
+    }
+        
 }
