@@ -4,8 +4,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.persistence.OneToMany;
 
 import java.util.Set;
 import java.util.HashSet;
@@ -16,7 +18,7 @@ public class Jogo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String nome;
+    private String titulo;
     
     public int getId() {
         return id;
@@ -24,21 +26,37 @@ public class Jogo {
     public void setId(int id) {
         this.id = id;
     }
-    public String getNome() {
-        return nome;
+    public String getTitulo() {
+        return titulo;
     }
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setTitulo (String titulo) {
+        this.titulo = titulo;
     }
 
-    @OneToMany(mappedBy = "genero")
-    private Set<Jogo> jogos = new HashSet<>();
-
-    public Set<Jogo> getJogos() {
-        return jogos;
+    @ManyToMany(mappedBy = "id_genero")
+    private Genero genero;
+    public void setGenero(Genero genero) {
+        this.genero = genero;
     }
     public void setJogos(Set<Jogo> jogos) {
         this.jogos = jogos;
     }
+
+    @ManyToMany
+    @JoinTable(
+        name = "jogos_possuem_plataforma",
+        joinColumns = @JoinColumn(name = "jogos_id"),
+        inverseJoinColumns = @JoinColumn(name = "plataformas_id")
+    )
+
+    private Set<Jogo> jogos = new HashSet<>();
+    
+    public Set<Jogo> getJogos() {
+        return jogos;
+    }
+    public Genero getGenero() {
+        return genero;
+    }
+    
 
 }
