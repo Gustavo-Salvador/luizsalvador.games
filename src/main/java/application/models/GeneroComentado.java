@@ -33,7 +33,7 @@ public class Genero { //criação da classe genero, entidade do tipo tabela
         this.nome = nome; //define o respectivo nome da classe para o valor fonecido
     } //fechamento do método
 
-    @OneToMany(mappedBy = "genero") //anotação para criação da relação um para muitos com o nome de genero
+    @OneToMany(mappedBy = "genero") //anotação para criação da relação um para muitos com o nome de gener
     private Set<Jogo> jogos = new HashSet<>(); //criação do atributo privado jogos do tipo HashSet, campo relacionado a outra tabela com a relação um para muitos 
 
     public Set<Jogo> getJogos() { //criação do método getJogos com retorno
